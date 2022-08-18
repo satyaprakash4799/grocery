@@ -41,6 +41,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'user_profile.apps.UserProfileConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -86,7 +87,7 @@ WSGI_APPLICATION = 'grocery.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'grocery'
+        'NAME': 'grocery',
     }
 }
 
@@ -133,4 +134,4 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 from django.core.management.commands.runserver import Command as runserver
-runserver.default_port == env('DEFAULT_PORT')
+runserver.default_port = env('DEFAULT_PORT')
