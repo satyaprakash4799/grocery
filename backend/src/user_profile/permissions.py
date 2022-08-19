@@ -14,3 +14,10 @@ class IsTokenValid(BasePermission):
         except BlackListedToken.DoesNotExist:
             is_allowed_user = True
         return is_allowed_user
+
+class IsNotAuthenticated(BasePermission):
+    def has_permission(self, request, view):
+        isNotAuthenticated = True
+        if request.user and request.user.is_authenticated:
+            isNotAuthenticated = False
+        return isNotAuthenticated

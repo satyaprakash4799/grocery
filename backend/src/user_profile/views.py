@@ -7,10 +7,10 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from .models import UserProfiles, Addresses, BlackListedToken
 from .serializers import UserSerializer, UserProfileSerializer
-from .permissions import IsTokenValid
+from .permissions import IsTokenValid, IsNotAuthenticated
 
 @api_view(['POST'])
-@permission_classes(AllowAny)
+@permission_classes([IsNotAuthenticated])
 def create_user(request):
     """Create a new user"""
     if request.method == 'POST':
