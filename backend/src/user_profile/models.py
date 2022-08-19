@@ -17,7 +17,7 @@ class Addresses(models.Model):
     """
     User addresses model
     """
-    user_profile = models.ForeignKey(UserProfiles, on_delete=models.CASCADE)
+    user_profile = models.ForeignKey(UserProfiles, on_delete=models.CASCADE, related_name='addresses')
     house_no = models.IntegerField(blank=False, null=False)
     apartment_name = models.CharField(max_length=255, null=True, blank=True)
     street_details = models.CharField(max_length=255, null=True, blank=True)
