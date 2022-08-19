@@ -1,27 +1,54 @@
+from functools import partial
 from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from django.contrib.auth.models import User
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from .models import UserProfiles, Addresses
 from .serializers import UserSerializer, UserProfileSerializer
 
+@api_view(['POST'])
+@permission_classes(AllowAny)
+def create_user(request):
+    """Create a new user"""
+    if request.method == 'POST':
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 @api_view(['GET', 'PUT','DELETE'])
-def user_details(request, user_id):
+@permission_classes([IsAuthenticated])
+def user_details(request):
     """
     Get, update, delete user details
     """
+    try:
+        user = User.objects.get(id=request.user.id)
+    except User.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
     if request.method == 'GET':
-        user = User.objects.get(id=user_id)
         serializer = UserSerializer(user)
         return Response(serializer.data)
+    elif request.method == 'PUT':
+        serializer = UserSerializer(instance=user, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'PUT','DELETE'])
-def user_profile(request, user_id):
+@permission_classes([IsAuthenticated])
+def user_profile(request):
     """
     Get, update, delete user profile details
     """
+    try:
+        user_profile = UserProfiles.objects.get(id=request.user.id)
+    except UserProfiles.DoesNotExist:
+        return Response(status.HTTP_404_NOT_FOUND)
     if request.method == 'GET':
-        user_profile = UserProfiles.objects.get(id=user_id)
         serializer = UserProfileSerializer(user_profile)
         return Response(serializer.data)

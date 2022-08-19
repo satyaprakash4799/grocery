@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 class UserProfiles(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     age = models.IntegerField(default=18, null=False, blank=False)
-    
+    phone_number = models.IntegerField(null=True,blank=True)
     def __str__(self):
         return self.user.username
     
