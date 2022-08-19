@@ -5,8 +5,9 @@ from rest_framework.response import Response
 from django.contrib.auth.models import User
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
-from .models import UserProfiles, Addresses
+from .models import UserProfiles, Addresses, BlackListedToken
 from .serializers import UserSerializer, UserProfileSerializer
+from .permissions import IsTokenValid
 
 @api_view(['POST'])
 @permission_classes(AllowAny)
@@ -20,7 +21,7 @@ def create_user(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'PUT','DELETE'])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated, IsTokenValid])
 def user_details(request):
     """
     Get, update, delete user details
@@ -40,7 +41,7 @@ def user_details(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'PUT','DELETE'])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated, IsTokenValid])
 def user_profile(request):
     """
     Get, update, delete user profile details
@@ -52,3 +53,16 @@ def user_profile(request):
     if request.method == 'GET':
         serializer = UserProfileSerializer(user_profile)
         return Response(serializer.data)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated, IsTokenValid])
+def logout(request):
+    if request.method == 'POST':
+        try:
+            user = request.user
+            token = (request.auth.token).decode('utf8')
+            black_listed_token = BlackListedToken.objects.create(user=user, token=token)
+            black_listed_token.save()
+            return Response(status=status.HTTP_205_RESET_CONTENT)
+        except Exception as e:
+            return Response(e)

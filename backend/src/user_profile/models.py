@@ -31,4 +31,15 @@ class Addresses(models.Model):
     
     class Meta:
         verbose_name = "User address"
-        verbose_name_plural = "User adresses"
+        verbose_name_plural = "User addresses"
+
+class BlackListedToken(models.Model):
+    """
+    List of blacklisted tokens that are not allowed
+    """
+    token = models.CharField(max_length=500)
+    user = models.ForeignKey(User, related_name='token_user', on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        unique_together = ('token', 'user')
