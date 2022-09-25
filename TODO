@@ -1,0 +1,37 @@
+
+Todo:
+  Backend:
+    User module:
+      ✔ Login /Registration / Logout @done(22-08-19 21:52)
+      ✘ (Signin with Google/Facebook/ social logins) @cancelled(22-08-19 21:52)
+      ☐ My basket (this actually deals with products being added to cart and manage it)
+      ☐ My orders (This deals with history of transactions and orders for a logged in customer)
+      ✔ My profile (Edit profile, delivery address management, change password, email address) @done(22-08-19 20:04)
+      ✔ Destroy token on logout @done(22-08-20 17:07)
+    Common Admin Module:
+      ☐ Admin login features
+      ☐ Manages Employee executive delivery history
+      ☐ Manage Customers
+      ☐ Manage Products addition to applicationManage Reviews and Ratings in applicationManage Coupons and Offers in applicationsManage new offers (to be displayed in splash screen )
+      ☐ About Us submissions
+      ☐ Blogs management (if needed)
+      ☐ Categories / Sub-categories management
+      ☐ Brand management
+      ☐ Filter management
+      ☐ Location settings
+    Designing:
+      ☐ Homepage design with splash screen, Banner with sliders and effects, offer views, products display designs, admin panel design, About Us (including smtp configurations), Careers, Privacy Policy, Terms & Conditions , Blogs design , Individual page designs , Menus and Submenus, Location selection design
+    Delivery management:
+      ☐ status of products delivery  and related notifications, Pending / Confirmation option 
+      ☐ a grid to view and manage all deliveries for executive login , option to update payment status for orders delivered
+  Frontend:
+    Users Module:
+      ☐ Login / Registration / Logout
+      ☐ (Sign In with Google / Facebook social logins)
+      ☐ My Basket ( This actually deals with products being added to kart and manage it)
+      ☐ My Orders  ( This deals with the history of  transactions  and orders for a logged in customer)
+      ☐ My Profile (Edit Profile , Delivery Address mgmt, Change Password , Email Address)
+    Designing:
+      ☐ Homepage design with a splash screen, Banner with sliders and effects, offer views, products display designs, admin panel design, About Us (including SMTP configurations), Careers, Privacy Policy, Terms & Conditions, Blogs design, Individual page designs, Menus and Submenus, Location selection design
+    Delivery management:
+      ☐ status of products delivery  and related notifications, Pending / Confirmation option, a grid to view and manage all deliveries for executive login, option to update payment status for orders delivered
