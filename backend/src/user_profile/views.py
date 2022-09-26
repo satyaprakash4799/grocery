@@ -47,9 +47,9 @@ def user_profile(request):
     Get, update, delete user profile details
     """
     try:
-        user_profile = UserProfiles.objects.get(id=request.user.id)
+        user_profile = UserProfiles.objects.get(user_id=request.user.id)
     except UserProfiles.DoesNotExist:
-        return Response(status.HTTP_404_NOT_FOUND)
+        return Response(status=status.HTTP_404_NOT_FOUND)
     if request.method == 'GET':
         serializer = UserProfileSerializer(user_profile)
         return Response(serializer.data)
