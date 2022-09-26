@@ -1,9 +1,11 @@
-from functools import partial
+from urllib import request
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from django.contrib.auth.models import User
 from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.views import APIView
+from django.http import Http404
 
 from .models import UserProfiles, Addresses, BlackListedToken
 from .serializers import UserSerializer, UserProfileSerializer
@@ -19,41 +21,53 @@ def create_user(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class UserDetailsView(APIView):
+    """
+    User details view
+    """
+    permission_classes = [IsAuthenticated, IsTokenValid]
+    allowed_methods = ['GET', 'PUT', 'DELETE']
 
-@api_view(['GET', 'PUT','DELETE'])
-@permission_classes([IsAuthenticated, IsTokenValid])
-def user_details(request):
-    """
-    Get, update, delete user details
-    """
-    try:
-        user = User.objects.get(id=request.user.id)
-    except User.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-    if request.method == 'GET':
-        serializer = UserSerializer(user)
+    def get_object(self,id):
+        try:
+            return User.objects.get(id=id)
+        except User.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+    def get(self, request):
+        serializer = UserSerializer(self.get_object(request.user.id))
         return Response(serializer.data)
-    elif request.method == 'PUT':
-        serializer = UserSerializer(instance=user, data=request.data, partial=True)
+
+    def put(self, request):
+        serializer = UserSerializer(instance=self.get_object(request.user.id), data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['GET', 'PUT','DELETE'])
-@permission_classes([IsAuthenticated, IsTokenValid])
-def user_profile(request):
+    def delete(self,request):
+        user = self.get_object(request.user.id)
+        user.delete()
+        token = (request.auth.token).decode('utf8')
+        black_listed_token = BlackListedToken.objects.create(user=user, token=token)
+        black_listed_token.save()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+class UserProfilesView(APIView):
     """
     Get, update, delete user profile details
     """
-    try:
-        user_profile = UserProfiles.objects.get(user_id=request.user.id)
-    except UserProfiles.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-    if request.method == 'GET':
-        serializer = UserProfileSerializer(user_profile)
-        return Response(serializer.data)
+    permission_classes = [IsAuthenticated, IsTokenValid]
+    allowed_methods = ["GET"]
+    def get_object(self, id):
+        try:
+            return UserProfiles.objects.get(user_id=id)
+        except UserProfiles.DoesNotExist:
+            raise Http404
 
+    def get(self, request):
+        serializer = UserProfileSerializer(self.get_object(request.user.id))
+        return Response(serializer.data)
+    
 @api_view(['POST'])
 @permission_classes([IsAuthenticated, IsTokenValid])
 def logout(request):
