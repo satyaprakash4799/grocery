@@ -6,8 +6,8 @@ class UserProfiles(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user_profile', primary_key=True)
     age = models.IntegerField(default=18, null=False, blank=False)
     phone_number = models.IntegerField(null=True,blank=True)
-    # def __str__(self):
-    #     return self.user.username
+    def __str__(self):
+        return self.user.username
     
     class Meta:
         verbose_name = "user profile"
