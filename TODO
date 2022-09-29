@@ -4,10 +4,47 @@ Todo:
     User module:
       ✔ Login /Registration / Logout @done(22-08-19 21:52)
       ✘ (Signin with Google/Facebook/ social logins) @cancelled(22-08-19 21:52)
+      ☐ Products
+      ☐ Product Categories
       ☐ My basket (this actually deals with products being added to cart and manage it)
       ☐ My orders (This deals with history of transactions and orders for a logged in customer)
       ✔ My profile (Edit profile, delivery address management, change password, email address) @done(22-08-19 20:04)
       ✔ Destroy token on logout @done(22-08-20 17:07)
+    Table:
+      Product stock:
+        ✔ product stocks id @done(22-09-29 14:50)
+        ✔ stock count @done(22-09-29 14:50)
+        ✔ stock name @done(22-09-29 14:50)
+      Product:
+        ✔ product id @done(22-09-29 14:54)
+        ✔ product stocks id @done(22-09-29 14:54)
+        ✔ product name @done(22-09-29 14:54)
+        ✔ product categories @done(22-09-29 14:54)
+        ✔ price @done(22-09-29 14:54)
+        ✔ discount @done(22-09-29 14:54)
+        ✔ max item @done(22-09-29 14:54)
+        ✔ product description @done(22-09-29 14:54)
+      Category:
+        ✔ Categoty id @done(22-09-29 14:54)
+        ✔ category name @done(22-09-29 14:54)
+        ✔ Category desription @done(22-09-29 14:54)
+      basket:
+        ✔ basket id @done(22-09-29 15:36)
+        ✔ product id @done(22-09-29 15:36)
+        ✔ quantity @done(22-09-29 15:36)
+        ✔ created_time @done(22-09-29 15:36)
+        ✔ updated_time @done(22-09-29 15:36)
+        ✔ user id @done(22-09-29 15:36)
+
+      order:
+        ✔ order id @done(22-09-29 15:44)
+        ✔ user id @done(22-09-29 15:44)
+        ✔ order time @done(22-09-29 15:44)
+        ✔ product id @done(22-09-29 15:44)
+        ✔ quantity @done(22-09-29 15:44)
+
+      
+
     Common Admin Module:
       ☐ Admin login features
       ☐ Manages Employee executive delivery history
