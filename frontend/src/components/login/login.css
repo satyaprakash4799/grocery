@@ -3,14 +3,15 @@
     transform: translate(-50%, -50%);
     /* width: 250px; */
     padding: 20px 10px;
-    box-shadow: rgb(0 0 0 / 10%) 0px 1px 3px 1px, rgb(0 0 0 / 7%) 0px 0px 0px 1px;
+    box-shadow: rgb(0 0 0 / 10%) 0px 1px 3px 1px, rgba(0 0 0 / 7%) 0px 0px 0px 1px;
     border-radius: 4px;
     position: absolute;
     left: 50%;
     top: 40%;
     min-width: 500px;
     min-height: 250px;
+    background-color: #fff;
 }
 .login h2{
-    color:  var(--bs-yellow);
+    color:  var(--primary-dark-color);
 }

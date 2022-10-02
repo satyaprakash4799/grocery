@@ -7,15 +7,21 @@ const userAuthenticate = createAsyncThunk('user/authenticateUser', async(data)=>
     return response.data;
 })
 
+const initialState = {
+    user: {},
+    token: {},
+    status:'idle',
+    error: null
+}
 export const userSlicer = createSlice({
     'name': 'user',
-    initialState:{
-        user: {},
-        token: {},
-        status:'idle',
-        error: null
+    initialState: initialState ,
+    reducers: {
+        getToken(state,action){
+            state.token.accessToken = localStorage.getItem('accessToken');
+            state.token.refreshToken = localStorage.getItem('refreshToken');
+        }
     },
-    reducers: {},
     extraReducers(builder) {
         builder
             .addCase(userAuthenticate.pending, (state) => {
@@ -35,6 +41,6 @@ export const userSlicer = createSlice({
 });
 
 
-
+export const { getToken } = userSlicer.actions;
 export default userSlicer.reducer;
 export {userAuthenticate};

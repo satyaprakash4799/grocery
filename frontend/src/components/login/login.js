@@ -6,6 +6,7 @@ import apiCall from "../../api/axios";
 
 import './login.css'
 import { userAuthenticate } from "../../features/user/user";
+import Header from "../header/header";
 
 class Login extends Component {
   constructor(props) {
@@ -19,12 +20,6 @@ class Login extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.authenticateUser  = this.authenticateUser.bind(this);
 
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.token !== this.props.token){
-      console.log(this.props.token)
-    }
   }
 
   validateLoginButton = () => {
@@ -49,9 +44,11 @@ class Login extends Component {
     this.props.userAuthenticate({username: this.state.username, password: this.state.password});
   }
   render() {
-    const { username, password, errors } = this.props;
+    const { username, password, errors } = this.state;
     const { validateLoginButton,  authenticateUser} = this;
     return (
+      <>
+        <Header></Header>
         <div className="login">
           <Form className="form" inline>
               <h2 className="title">Login</h2>
@@ -59,20 +56,21 @@ class Login extends Component {
                 <Input id="username" name="username" type="text" placeholder="Username" required bsSize="sm" className="mb-3" 
                   onChange={(e)=> this.handleChange('username', e.target.value)} value={username}
                   ></Input>
-                <Label for="username">Username</Label>
+                <Label for="username" className="primary-dark">Username</Label>
               </FormGroup>
               <FormGroup floating>
                 <Input id="password" type="password" name="password" placeholder="Password" required bsSize="sm" className="mb-3" 
                   onChange={(e)=> this.handleChange('password', e.target.value)} value={password}
                   ></Input>
-                <Label for="username">Password</Label>
+                <Label for="password" className="primary-dark">Password</Label>
               </FormGroup>
               <FormGroup>
-                <Button type="submit" color="warning" className="me-3" disabled={validateLoginButton()} onClick={(e)=> authenticateUser(e)}>Login</Button>
-                <Button outline color="warning">Signup</Button>
+                <Button type="submit" className="button-dark me-3" disabled={validateLoginButton()} onClick={(e)=> authenticateUser(e)}>Login</Button>
+                <Button outline className="button-light button">Signup</Button>
               </FormGroup>
           </Form>
         </div>
+      </>
     );
   }
 }

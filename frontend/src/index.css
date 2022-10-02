@@ -1,0 +1,58 @@
+:root{
+    --primary-dark-color: #fac251;
+    --primary-medium-color: #ebddc2;
+    --primary-light-color: #fdf7eb;
+
+    --secondary-dark-color: #97a2ac;
+    --secondary-medium-color: #c4d0da;
+    --secondary-light-color: #eae9e9;
+
+    --tertiary-dark-color: #000000;
+    --tertiary-medium-color: #505050;
+    --tertiary-light-color: #c0c2c4;
+
+
+}
+
+body {
+    background-color: var(--primary-light-color);
+}
+
+.primary-dark {
+    color: var(--primary-dark-color) !important;
+}
+.primary-medium-dark {
+    color:var(--primary-medium-color) !important;
+}
+.primary-light-dark {
+    color:var(--primary-light-color)!important;
+}
+.primary-dark-bg {
+    background-color: var(--primary-dark-color) !important;
+}
+.primary-medium-dark-bg{
+    background-color:var(--primary-medium-color) !important;
+}
+.primary-light-dark-bg {
+    background-color:var(--primary-light-color)!important;
+}
+
+.button-dark {
+    background-color: var(--primary-dark-color) !important;
+    color: #fff!important;
+    border-color: var(--primary-dark-color) !important;
+}
+.button-light {
+    color: var(--primary-dark-color) !important;
+    background-color: var(--primary-light-color)!important;
+    border-color: var(--primary-dark-color) !important;
+}
+.button-light:hover.button {
+    color: var(--primary-light-color) !important;
+    background-color: var(--primary-dark-color) !important;
+}
+
+.form-control:focus{
+    border-color: var(--primary-dark-color) !important;
+    box-shadow: 0 0 0 0.25rem rgba(var(--primary-dark-color),0.8)
+}
