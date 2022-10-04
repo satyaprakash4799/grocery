@@ -41,13 +41,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    # added apps
-    'user_profile.apps.UserProfileConfig',
-    'product.apps.ProductConfig',
-    # third party
-    'rest_framework',
-    'corsheaders',
-    'rest_framework_simplejwt',
     # default
     'django.contrib.admin',
     'django.contrib.auth',
@@ -55,6 +48,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # third party
+    'rest_framework',
+    'corsheaders',
+    'rest_framework_simplejwt',
+    'django_extensions',
+
+    # added apps
+    'user_profile.apps.UserProfileConfig',
+    'product.apps.ProductConfig',
 ]
 
 MIDDLEWARE = [

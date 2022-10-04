@@ -7,7 +7,7 @@ from rest_framework.views import APIView
 from django.http import Http404
 
 
-from product.models import Products
+from product.models import Products, ProductsStocks
 from product.serializers import ProductsSerializer
 from user_profile.permissions import IsTokenValid, IsNotAuthenticated
 
@@ -30,7 +30,7 @@ class ProductsView(APIView):
         return Response(serializer.data)
 
     def post(self, request):
-        serializer = ProductsSerializer(data=request.data)
+        serializer = ProductsSerializer(data=request.data, context={"request": request})
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
