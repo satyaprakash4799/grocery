@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 class UserProfiles(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user_profile', primary_key=True)
     age = models.IntegerField(default=18, null=False, blank=False)
-    phone_number = models.IntegerField(null=True,blank=True)
+    phone_number = models.CharField(null=True,blank=True, max_length=12)
     def __str__(self):
         return self.user.username
     
@@ -24,7 +24,7 @@ class Addresses(models.Model):
     landmark_details = models.CharField(max_length=255, null=True, blank=True)
     area_details = models.CharField(max_length=255, null=False, blank=False)
     city = models.CharField(max_length=255, null=False, blank=False)
-    pincode = models.IntegerField(null=False, blank=False)
+    pincode = models.CharField(null=False, blank=False, max_length=10)
 
     def __str__(self):
         return self.user_profile.user.username

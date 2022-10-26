@@ -100,11 +100,11 @@ WSGI_APPLICATION = 'grocery.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'HOST': 'localhost',
-        'USER': 'postgres',
-        'NAME': 'grocery',
-        'PORT': 4432,
-        'PASSWORD': 'Gain@1234'
+        'HOST': env('DATABASE_HOST'),
+        'USER': env('DATABASE_USER'),
+        'NAME': env('DATABASE_NAME'),
+        'PORT': env('DATABASE_PORT'),
+        'PASSWORD': env('DATABASE_PASSWORD')
     }
 }
 
