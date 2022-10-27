@@ -25,7 +25,7 @@ class ProductsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Products
         fields = "__all__"
-        read_only_fields = ("id", "product_categories", "product_stocks")
+        read_only_fields = ("id", "product_categories")
     
     # def get_product_image(self,product):
     #     request = self.context.get('request')

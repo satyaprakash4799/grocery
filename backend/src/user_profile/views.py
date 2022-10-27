@@ -48,8 +48,9 @@ class UserDetailsView(APIView):
         user = self.get_object(request.user.id)
         user.delete()
         token = (request.auth.token).decode('utf8')
-        black_listed_token = BlackListedToken.objects.create(user=user, token=token)
-        black_listed_token.save()
+        # commented code here, because database entry will be deleted
+        # black_listed_token = BlackListedToken.objects.create(user=user, token=token)
+        # black_listed_token.save()
         return Response(status=status.HTTP_204_NO_CONTENT)
 class UserProfilesView(APIView):
     """

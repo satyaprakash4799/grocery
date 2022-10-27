@@ -61,8 +61,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    # custom
-    'corsheaders.middleware.CorsMiddleware',
     # default
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -71,6 +69,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
+    # custom
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'grocery.urls'
@@ -157,10 +158,13 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny'
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10,
+    'PAGE_SIZE': 1,
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ]
+    ],
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    )
 }
 
 CORS_ORIGIN_ALLOW_ALL = False
@@ -168,6 +172,10 @@ CORS_ALLOWED_ORIGINS = (
     'http://127.0.0.1:3000',
     'http://localhost:3000',
 )
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
+]
 from datetime import timedelta
 
 SIMPLE_JWT = {
@@ -213,3 +221,4 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+# AUTH_USER_MODEL = 'user_profile.User'
