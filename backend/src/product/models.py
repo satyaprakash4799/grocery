@@ -27,7 +27,7 @@ class Products(models.Model):
     product_stocks = models.OneToOneField(ProductsStocks, related_name="products", on_delete=models.CASCADE)
     product_categories = models.ManyToManyField(Categories, related_name="categories")
     product_name = models.CharField(max_length=255, blank=False, null=True)
-    product_price = models.SmallIntegerField(default=0)
+    product_price = models.FloatField(default=0)
     product_discount = models.FloatField(default=0.0)
     product_max_order_quantity = models.IntegerField(default=0)
     product_description = models.TextField(blank=True, max_length=500, null=True)

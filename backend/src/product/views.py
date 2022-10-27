@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from django.contrib.auth.models import User
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.views import APIView
 from django.http import Http404
 from rest_framework.pagination import PageNumberPagination
@@ -17,7 +17,7 @@ class ProductsView(APIView, PageNumberPagination):
     """
     List of products
     """
-    permission_classes = [IsAuthenticated, IsTokenValid]
+    permission_classes = [IsAuthenticated, IsTokenValid, IsAdminUser]
     allowed_methods = ['GET']
 
     def get_object(self):
